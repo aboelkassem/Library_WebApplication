@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryDBContext">
+    <EntitySetMapping Name="authors">
+      <EntityTypeMapping TypeName="LibraryModel.author">
+        <MappingFragment StoreEntitySet="authors">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="nationality" ColumnName="nationality" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="author_id" ColumnName="author_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="books">
+      <EntityTypeMapping TypeName="LibraryModel.book">
+        <MappingFragment StoreEntitySet="books">
+          <ScalarProperty Name="File" ColumnName="File" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="member_id" ColumnName="member_id" />
+          <ScalarProperty Name="availabilty" ColumnName="availabilty" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="add_date" ColumnName="add_date" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="pages" ColumnName="pages" />
+          <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
+          <ScalarProperty Name="author_id" ColumnName="author_id" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="publication_id" ColumnName="publication_id" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="edition" ColumnName="edition" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="LibraryModel.category">
+        <MappingFragment StoreEntitySet="categories">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="LibraryModel.comment">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="book_id" ColumnName="book_id" />
+          <ScalarProperty Name="comment_data" ColumnName="comment_data" />
+          <ScalarProperty Name="comments" ColumnName="comment" />
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="LibraryModel.Log">
+        <MappingFragment StoreEntitySet="Logs">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="log_it" ColumnName="log_it" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="publications">
+      <EntityTypeMapping TypeName="LibraryModel.publication">
+        <MappingFragment StoreEntitySet="publications">
+          <ScalarProperty Name="logo" ColumnName="logo" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="publication_id" ColumnName="publication_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="LibraryModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subcategories">
+      <EntityTypeMapping TypeName="LibraryModel.subcategory">
+        <MappingFragment StoreEntitySet="subcategory">
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="subcategory_name" ColumnName="subcategory_name" />
+          <ScalarProperty Name="subcategory_id" ColumnName="subcategory_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserClaims">
+      <EntityTypeMapping TypeName="LibraryModel.UserClaim">
+        <MappingFragment StoreEntitySet="UserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLogins">
+      <EntityTypeMapping TypeName="LibraryModel.UserLogin">
+        <MappingFragment StoreEntitySet="UserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="LibraryModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="join_data" ColumnName="join_data" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserRoles" TypeName="LibraryModel.UserRoles" StoreEntitySet="UserRoles">
+      <EndProperty Name="user">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

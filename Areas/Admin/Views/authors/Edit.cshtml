@@ -1,0 +1,82 @@
+﻿@model Library.Models.author
+
+@{
+    ViewBag.Title = "Edit "+ Model.first_name Model.last_name;
+}
+
+@using (Html.BeginForm("Edit", "authors", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.author_id)
+    <div class="card o-hidden border-0 shadow-lg">
+        <div class="card-header">
+            <div class="font-weight-bold text-gray-800 text-center h3">
+                Edit Author In Library
+                <i class="fas fa-user-edit"></i>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="p-5">
+                        <div class="form-group row">
+                            @Html.ValidationSummary(true, "", new { @class = "invalid-feedback text-danger" })
+                            @Html.LabelFor(model => model.first_name, htmlAttributes: new { @class = "col-sm-2 col-form-label form-control-plaintext" })
+                            <div class="col-sm-10 mb-3 mb-sm-0">
+                                @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "invalid-feedback text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-2 form-control-plaintext" })
+                            <div class="col-md-10 mb-3 mb-sm-0">
+                                @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "invalid-feedback text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.nationality, htmlAttributes: new { @class = "control-label col-md-2 form-control-plaintext" })
+                            <div class="col-md-10 mb-3 mb-sm-0">
+                                @Html.EditorFor(model => model.nationality, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.nationality, "", new { @class = "invalid-feedback text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.description, "Description", htmlAttributes: new { @class = "control-label col-md-2 form-control-plaintext" })
+                            <div class="col-md-10 mb-3 mb-sm-0">
+                                @Html.TextAreaFor(model => model.description, new { @class = "form-control", rows = "5" })
+                                @Html.ValidationMessageFor(model => model.description, "", new { @class = "invalid-feedback text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.photo, htmlAttributes: new { @class = "control-label col-md-2 form-control-plaintext" })
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.uploadedAuthorImage, new { type = "file", @class = "form-control-file custom-file-input", data_val_extension = "Select Only Images files", data_val_extension_extension = "jpg,png,jpeg,gif" })
+                                <label class="custom-file-label" for="photo">Choose file...</label>
+                                @Html.ValidationMessageFor(model => model.uploadedAuthorImage, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-primary btn-user btn-block" />
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pt-5">
+                        <!-- Illustrations -->
+                        <div class="m-0">
+                            <img class="hidden-sm hidden-xs px-3 px-sm-4 mt-3 mb-4" style="width: 43rem;height: 27rem;margin-left:-300px;" src="~/Content/img/recycle.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.ActionLink("Back to List", "Index", null, new { @class = " btn btn-danger text-white" })
+    </div>
+}

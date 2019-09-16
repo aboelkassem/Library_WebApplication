@@ -1,0 +1,201 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Library.Models.book>
+
+@{
+    ViewBag.Title = "All Books";
+}
+
+<div class="card mb-4 py-3 border-bottom-secondary">
+    <div class="card-body">
+        <h3 class="font-weight-bold center-block text-gray-800">Books | Display & Management</h3>
+        <div class="btn btn-primary ">@Html.ActionLink("Add New One", "Create",null,new { @class = "text text-white navbar-link"}) <i class="fas fa-plus-circle fa-1x"></i></div>
+    </div>
+</div>
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        @if (TempData["Success"] != null)
+        {
+            <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+        }
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Books Data</h6>
+            <div class="pull-right" style="margin-right: 125px;margin-top: -23px;">
+                @using (Html.BeginForm("Index", "books", FormMethod.Get, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+                {
+                    <div class="input-group">
+                        <input class="form-control bg-light border-0 small" type="search" placeholder="Search By Book Title" aria-label="Search" name="search" id="BooksTxtSearch" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary hidden-sm" type="submit"><i class="fas fa-search fa-sm"></i> Search</button>
+                            <button class="btn btn-primary visible-sm" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                        @using (Html.BeginForm("Index", "books", FormMethod.Get, new { @class = "form-inline mr-auto w-100 navbar-search" }))
+                        {
+                            <div class="input-group">
+                                <input class="form-control bg-light border-0 small" type="search" placeholder="Search By Book Title" aria-label="Search" name="search" id="BooksTxtSearch" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    @if (Model.Count() != 0)
+                    {
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().photo)
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Title", "Index", new { sortedBy = ViewBag.SortTitleParameter, search = Request.QueryString["search"] })
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().edition)
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Price", "Index", new { sortedBy = ViewBag.SortPriceParameter, search = Request.QueryString["search"] })
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Pages Number", "Index", new { sortedBy = ViewBag.SortPagesNumberParameter, search = Request.QueryString["search"] })
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().description)
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Added Date", "Index", new { sortedBy = ViewBag.SortAddedDateParameter, search = Request.QueryString["search"] })
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Rate", "Index", new { sortedBy = ViewBag.SortRateParameter, search = Request.QueryString["search"] })
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().availabilty)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().tags)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Author Name")
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().publication.name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().subcategory.subcategory_name)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Added By")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Action")
+                                </th>
+                            </tr>
+                        </thead>
+                        foreach (var item in Model)
+                        {
+                            using (Html.BeginForm("Delete", "books", new { id = item.book_id }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="@Url.Content(item.photo)" alt="Alt_@item.photo" width="100" height="100" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.edition)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.price)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.pages)
+                                        </td>
+                                        <td>
+                                            <div class="description overflow-auto">
+                                                @Html.DisplayFor(modelItem => item.description)
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.add_date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.rate)
+                                        </td>
+                                        <td>
+                                            @if (item.availabilty == 1)
+                                            {
+                                                <text>Available</text>
+                                            }
+                                            else if (item.availabilty == 1)
+                                            {
+                                                <text>Not Available</text>
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tags)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.author.first_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.publication.name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.subcategory.subcategory_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.user.first_name)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" Edit", "Edit", new { id = item.book_id }, new { @class = "btn btn-primary fas fa-edit" })
+                                            @Html.ActionLink(" Details", "Details", new { id = item.book_id }, new { @class = "btn btn-info far fa-file-alt" })
+                                            <input class="btn btn-danger" type="submit" value="Delete"
+                                                   onclick="return confirm('Are you sure you want to delete the Book with ID = @item.book_id');" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                <b class="text-danger">Sorry There Is No Books To Show, @Html.ActionLink("Click Here To Add New One", "Create")</b>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], sortedBy = Request.QueryString["sortedBy"] }), /* To keep Paging when doing sorted,searched */
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })  <!--final overload To show PagedList if needed , like if there are 1 record don't need to show it .... and know current page where we are -->

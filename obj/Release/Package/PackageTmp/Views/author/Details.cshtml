@@ -1,0 +1,101 @@
+﻿@model Library.Models.author
+@using Library.Models
+@{
+    ViewBag.Title = Model.first_name + " " +Model.last_name;
+    LibraryDBContext db = new LibraryDBContext();
+    List<book> books = db.books.ToList();
+}
+
+<section class="course_details_area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 course_details_left">
+                <div class="main_image">
+                    <img class="img-fluid img-thumbnail" src="@Url.Content(Model.photo)" alt="alt_@Model.first_name">
+                </div>
+                <div class="content_wrapper">
+                    <h4 class="title_top">Description</h4>
+                    <div class="content">
+                       @Model.description
+                    </div>
+
+                    <h4 class="title">His Books</h4>
+                    <div class="content">
+                        <ul class="course_list">
+                            @foreach (var book in books.Where(x => x.author_id == Model.author_id).ToList())
+                            {
+                                <li class="justify-content-between align-items-center d-flex">
+                                    <p><img class="img-responsive" style="width: 70px;" src="@Url.Content(book.photo)" alt="alt_@book.title" />
+                                        @book.title
+                                    </p>
+                                    <a class="btn_2 text-uppercase" href="~/book/Details/@book.book_id">View Details</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 right-contents">
+                <div class="sidebar_top">
+                    <ul>
+                        <li>
+                            <a class="justify-content-between d-flex">
+                                <p>Author Name</p>
+                                @if (Model.first_name == "Unknown")
+                                {
+                                    <span class="color">@Model.first_name</span>
+                                }
+                                else
+                                {
+                                    <span class="color">@Model.first_name @Model.last_name</span>
+                                }
+                            </a>
+                        </li>
+                        <li>
+                            <a class="justify-content-between d-flex">
+                                <p>Nationality </p>
+                                <span>@Model.nationality</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <h4 class="title">Other Authors</h4>
+                <div class="content">
+                    <div class="comments-area mb-30">
+                        <div class="comment-list">
+                            @foreach (var author in db.authors.OrderByDescending(x => x.author_id).Take(5).ToList())
+                            {
+                                <div class="single-comment single-reviews justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb col-md-4 mb-3">
+                                            <img class="img-fluid img-profile img-responsive img-rounded" style="height: 108px; width: 400px !important;" src="@Url.Content(author.photo)" alt="alt_@Model.first_name">
+                                        </div>
+                                        <div class="desc col-md-8">
+                                            <h5>
+                                                @if (Model.first_name == "Unknown")
+                                                {
+                                                    <a href="~/author/Details/@author.author_id">@author.first_name</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/author/Details/@author.author_id">@author.first_name @author.last_name</a>
+                                                }
+                                            </h5>
+                                            <div class="rating">
+                                                @author.nationality
+                                            </div>
+                                            <p class="comment">
+                                                @author.description
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

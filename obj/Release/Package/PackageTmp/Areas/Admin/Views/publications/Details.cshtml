@@ -1,0 +1,52 @@
+﻿@model Library.Models.publication
+
+@{
+    ViewBag.Title = Model.name;
+}
+    <div class="card o-hidden border-0 shadow-lg">
+        <div class="card-header">
+            <div class="font-weight-bold text-gray-800 text-center h3">
+                @Html.DisplayFor(model => model.name)
+                <i class="fab fa-old-republic"></i>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="p-5">
+                        <table class="table table-striped">
+                            <tr class="form-group row">
+                                <th class="card-title font-weight-bolder badge bg-primary text-lg ">
+                                    @Html.DisplayNameFor(model => model.address)
+                                </th>
+                                <th class="col-md-10 mb-3 mb-sm-0 text-body text-info ">
+                                    @Html.DisplayFor(model => model.address)
+                                </th>
+                            </tr>
+
+                            <tr class="form-group row">
+                                <td class="card-title font-weight-bolder badge bg-secondary text-lg">
+                                    @Html.DisplayNameFor(model => model.contact)
+                                </td>
+                                <td class="col-md-10 mb-3 mb-sm-0 text-info">
+                                    @Html.DisplayFor(model => model.contact)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pt-5">
+                        <!-- Illustrations -->
+                        <div class="m-0">
+                            <img class="img-fluid img-thumbnail img px-3 px-sm-4 mt-3 mb-4 hidden-sm" style="width: 43rem;height: 27rem;margin-left:-300px;" src="@Url.Content(Model.logo)" alt="Alt_@Model.logo">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 hidden-lg" style="width: 43rem;height: 27rem;" src="@Url.Content(Model.logo)" alt="Alt_@Model.logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.ActionLink("Edit The Publication", "Edit", new { id = Model.publication_id }, new { @class = " btn btn-info text-white" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = " btn btn-danger text-white" })

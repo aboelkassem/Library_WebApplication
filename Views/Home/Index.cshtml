@@ -1,0 +1,335 @@
+﻿@using Library.Models
+@{
+    ViewBag.Title = "Library Bns";
+    LibraryDBContext db = new LibraryDBContext();
+}
+<!-- banner part start-->
+<section class="banner_part">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-xl-6">
+                <div class="banner_text">
+                    <div class="banner_text_iner">
+                        <h5>Every child yearns to learn</h5>
+                        <h1>
+                            Browse, Reading, Downloading Amazing Books
+                        </h1>
+                        <p>
+                            I's really good change to start learn new things now free and download the book pdf , don't need to print it or go to Publication , just it easy and fun. Remember To Enjoy
+                        </p>
+                        <div class="search_widget">
+                            @using (Html.BeginForm("Index", "book", FormMethod.Get))
+                            {
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input name="searched" type="text" class="form-control" id="BooksTxtSearch" placeholder='Search your book title'
+                                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search With book title'">
+                                        <div class="input-group-append">
+                                            <button class="btn" type="submit"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner part start-->
+<!-- feature_part start-->
+<section class="feature_part">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xl-3 align-self-center">
+                <div class="single_feature_text ">
+                    <h2>Our<br> Feature</h2>
+                    <p>
+                        Set have great you male grass yielding an yielding first their you're
+                        have called the abundantly fruit were man
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="single_feature">
+                    <div class="single_feature_part">
+                        <span class="single_feature_icon"><i class="ti-layers"></i></span>
+                        <h4>Better Future</h4>
+                        <p>
+                            Set have great you male grasses yielding yielding first their to
+                            called deep abundantly Set have great you male
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="single_feature">
+                    <div class="single_feature_part">
+                        <span class="single_feature_icon"><i class="ti-new-window"></i></span>
+                        <h4>Free & No Ads</h4>
+                        <p>
+                            it's completely free and in your own phone or labtop, so you don't need to buy it or harding ways like taking ads and many from you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="single_feature">
+                    <div class="single_feature_part single_feature_part_2">
+                        <span class="single_service_icon style_icon"><i class="ti-light-bulb"></i></span>
+                        <h4>Performace</h4>
+                        <p>
+                            it's about the server that you download the books from , don't need to loading much , and you can Upload your Book and share it with your friends.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- upcoming_event part start-->
+<!-- learning part start-->
+<section class="learning_part">
+    <div class="container">
+        <div class="row align-items-sm-center align-items-lg-stretch">
+            <div class="col-md-7 col-lg-7">
+                <div class="learning_img">
+                    <img src="~/Images/learning_img.png" alt="">
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-5">
+                <div class="learning_member_text">
+                    <h5>Our Target</h5>
+                    <h2>
+                        Learning with Love
+                        and Laughter
+                    </h2>
+                    <p>
+                        Fifth saying upon divide divide rule for deep their female all hath brind Days and beast
+                        greater grass signs abundantly have greater also
+                        days years under brought moveth.
+                    </p>
+                    <ul>
+                        <li>
+                            <span class="ti-pencil-alt"></span>Him lights given i heaven second yielding seas
+                            gathered wear
+                        </li>
+                        <li>
+                            <span class="ti-ruler-pencil"></span>Fly female them whales fly them day deep given
+                            night.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- learning part end-->
+<!-- member_counter counter start -->
+<section class="member_counter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_member_counter">
+                    <span class="counter">@db.books.Count()</span>
+                    <h4>Books</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_member_counter">
+                    <span class="counter">@db.users.Count()</span>
+                    <h4>Users</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_member_counter">
+                    <span class="counter">@db.publications.Count()</span>
+                    <h4>Publications</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="single_member_counter">
+                    <span class="counter">@db.authors.Count()</span>
+                    <h4>Authors</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- member_counter counter end -->
+<!--::review_part start::-->
+<section class="special_cource padding_top">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <h2>Special Books</h2>
+                </div>
+            </div>
+        </div>
+        <section class="special_cource">
+            <div class="row">
+                @foreach (var book in db.books.Where(x => x.rate == 4 || x.rate == 3).Take(3).ToList())
+                {
+                    <div class="col-sm-6 col-lg-4 MyBody">
+                        <div class="single_special_cource">
+                            <img src="@Url.Content(book.photo)" class="special_img img-thumbnail" style="width:100%; height: 530px;" alt="Alt_@book.title">
+                            <div class="special_cource_text">
+                                <a href="~/book/Details/@book.book_id" class="btn_4">@book.title</a>
+                                <h4>$ @book.price</h4>
+                                <a>
+                                    <h3>@db.subcategories.Where(x => x.subcategory_id == book.subcategory_id).FirstOrDefault().subcategory_name</h3>
+                                </a>
+                                <div id="summary">
+                                    <p class="collapse" id="collapseSummary">@book.description</p>
+                                    <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary"></a>
+                                </div>
+                                <div class="author_info">
+                                    <div class="author_img">
+                                        <img src="@Url.Content(db.authors.Where(x=>x.author_id == book.author_id).FirstOrDefault().photo)" style="width:55px" alt="">
+                                        <div class="author_info_text">
+                                            <p>Written by:</p>
+                                            @if (db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().first_name == "Unknown")
+                                            {
+                                                <h5><a href="~/author/Details/@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().author_id">@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().first_name</a></h5>
+                                            }
+                                            else
+                                            {
+                                                <h5><a href="~/author/Details/@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().author_id">@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().first_name @db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().last_name</a></h5>
+                                            }
+                                        </div>
+                                    </div>
+                                    @if (book.rate == 1)
+                                    {
+                                        <div class="author_rating">
+                                            <div class="rating">
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="far fa-star"></span>
+                                                <span class="far fa-star"></span>
+                                                <span class="far fa-star"></span>
+                                                <span class="far fa-star"></span>
+                                            </div>
+                                            <p>Bad Ratings</p>
+                                        </div>
+                                    }
+                                    @if (book.rate == 2)
+                                    {
+                                        <div class="author_rating">
+                                            <div class="rating">
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="far fa-star"></span>
+                                                <span class="far fa-star"></span>
+                                            </div>
+                                            <p>God Ratings</p>
+                                        </div>
+                                    }
+                                    @if (book.rate == 3)
+                                    {
+                                        <div class="author_rating">
+                                            <div class="rating">
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="far fa-star "></span>
+                                            </div>
+                                            <p>Very Good Ratings</p>
+                                        </div>
+                                    }
+                                    @if (book.rate == 4)
+                                    {
+                                        <div class="author_rating">
+                                            <div class="rating">
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                                <span class="fas fa-star checked"></span>
+                                            </div>
+                                            <p>Excellent Ratings</p>
+                                        </div>
+                                    }
+                                </div>
+                                <h4><span class="badge badge-info">Pages</span> @book.pages</h4>
+                                <h4><span class="badge badge-danger">Edition</span> @book.edition<sup style="margin-right: 54px;">Th</sup></h4>
+
+                                @if (db.publications.Where(x => x.publication_id == book.publication_id).Count() != 0)
+                                {
+                                    <div class="author_info">
+                                        <div class="author_img">
+                                            <img src="@Url.Content(db.publications.Where(x=>x.publication_id == book.publication_id).FirstOrDefault().logo)" style="width:55px" alt="">
+                                            <div class="author_info_text">
+                                                <p>Public by:</p>
+                                                <h5><a href="~/publication/Details/@db.publications.Where(x => x.publication_id == book.publication_id).FirstOrDefault().publication_id">@db.publications.Where(x => x.publication_id == book.publication_id).FirstOrDefault().name</a></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </section>
+    </div>
+</section>
+<!--::blog_part end::-->
+<!--::review_part start::-->
+<section class="testimonial_part padding_top">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-5">
+                <div class="section_tittle text-center">
+                    <h2>Some Of the Authors</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="textimonial_iner owl-carousel">
+                    @foreach (var author in db.authors.OrderByDescending(x => x.author_id).Take(3))
+                    {
+                        <div class="testimonial_slider">
+                            <div class="row">
+                                <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
+                                    <div class="testimonial_slider_text">
+                                        <p>
+                                            @author.description
+                                        </p>
+                                        <h4>@author.first_name @author.last_name</h4>
+                                        <h5>@author.nationality</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-xl-2 col-sm-4">
+                                    <div class="testimonial_slider_img">
+                                        <img src="@Url.Content(author.photo)" alt="Alt_@author.first_name">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 d-none d-xl-block">
+                                    <div class="testimonial_slider_text">
+                                        <p>
+                                            @author.description
+                                        </p>
+                                        <h4>@author.first_name @author.last_name</h4>
+                                        <h5>@author.nationality</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 d-none d-xl-block">
+                                    <div class="testimonial_slider_img">
+                                        <img src="@Url.Content(author.photo)" alt="Alt_@author.first_name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--::blog_part end::-->

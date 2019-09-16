@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Library.Models.subcategory>
+@using Library.Models;
+@{
+    ViewBag.Title = "Category";
+    LibraryDBContext db = new LibraryDBContext();
+    List<book> books = db.books.ToList();
+}
+
+@foreach (var subcategory in Model)
+{
+    <section class="special_cource padding_top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class="section_tittle text-center">
+                        <p>All Books in</p>
+                        <h2>@subcategory.subcategory_name</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @if (books.Where(x => x.subcategory_id == subcategory.subcategory_id).ToList().Count() != 0)
+                {
+                    foreach (var book in books.Where(x => x.subcategory_id == subcategory.subcategory_id).ToList())
+                    {
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="single_special_cource">
+                                <img src="@Url.Content(book.photo)" class="special_img" style="width:100%" alt="Alt_@book.title">
+                                <div class="special_cource_text">
+                                    <a href="~/book/Details/@book.book_id" class="btn_4">@book.title</a>
+                                    <h4>$ @book.price</h4>
+                                    <a>
+                                        <h3>@subcategory.subcategory_name</h3>
+                                    </a>
+                                    <div id="summary">
+                                        <p class="collapse" id="collapseSummary">@book.description</p>
+                                        <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary"></a>
+                                    </div>
+                                    <div class="author_info">
+                                        <div class="author_img">
+                                            <img src="@Url.Content(db.authors.Where(x=>x.author_id == book.author_id).FirstOrDefault().photo)" style="width:55px" alt="">
+                                            <div class="author_info_text">
+                                                <p>Written by:</p>
+                                                @if (db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().first_name == "Unknown")
+                                                {
+                                                    <h5><a href="~/author/Details/@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().author_id">@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().first_name</a></h5>
+                                                }
+                                                else
+                                                {
+                                                    <h5><a href="~/author/Details/@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().author_id">@db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().first_name @db.authors.Where(x => x.author_id == book.author_id).FirstOrDefault().last_name</a></h5>
+                                                }
+                                            </div>
+                                        </div>
+                                        @if (book.rate == 1)
+                                        {
+                                            <div class="author_rating">
+                                                <div class="rating">
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="far fa-star"></span>
+                                                    <span class="far fa-star"></span>
+                                                    <span class="far fa-star"></span>
+                                                    <span class="far fa-star"></span>
+                                                </div>
+                                                <p>Bad Ratings</p>
+                                            </div>
+                                        }
+                                        @if (book.rate == 2)
+                                        {
+                                            <div class="author_rating">
+                                                <div class="rating">
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="far fa-star"></span>
+                                                    <span class="far fa-star"></span>
+                                                </div>
+                                                <p>God Ratings</p>
+                                            </div>
+                                        }
+                                        @if (book.rate == 3)
+                                        {
+                                            <div class="author_rating">
+                                                <div class="rating">
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="far fa-star "></span>
+                                                </div>
+                                                <p>Very Good Ratings</p>
+                                            </div>
+                                        }
+                                        @if (book.rate == 4)
+                                        {
+                                            <div class="author_rating">
+                                                <div class="rating">
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                    <span class="fas fa-star checked"></span>
+                                                </div>
+                                                <p>Excellent Ratings</p>
+                                            </div>
+                                        }
+                                    </div>
+                                    <h4><span class="badge badge-info">Pages</span> @book.pages</h4>
+                                    <h4><span class="badge badge-danger">Edition</span> @book.edition<sup style="margin-right: 54px;">Th</sup></h4>
+                                   
+                                    @if (db.publications.Where(x => x.publication_id == book.publication_id).Count() != 0)
+                                    {
+                                        <div class="author_info">
+                                            <div class="author_img">
+                                                <img src="@Url.Content(db.publications.Where(x=>x.publication_id == book.publication_id).FirstOrDefault().logo)" style="width:55px" alt="">
+                                                <div class="author_info_text">
+                                                    <p>Public by:</p>
+                                                    <h5><a href="#">@db.publications.Where(x => x.publication_id == book.publication_id).FirstOrDefault().name</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h3>Sorry There is No Book in this Category <i class="far fa-sad-tear"></i></h3>
+                }
+            </div>
+        </div>
+    </section>
+    
+    }
+ <!--::blog_part end::-->

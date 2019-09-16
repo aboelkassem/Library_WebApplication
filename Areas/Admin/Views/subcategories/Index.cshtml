@@ -1,0 +1,112 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Library.Models.subcategory>
+
+@{
+    ViewBag.Title = "Sub Categories";
+}
+
+<div class="card mb-4 py-3 border-bottom-secondary">
+    <div class="card-body">
+        <h3 class="font-weight-bold center-block text-gray-800">Sub Categories | Display & Management</h3>
+        <div class="btn btn-primary ">@Html.ActionLink("Add New One", "Create", null, new { @class = "text text-white navbar-link" }) <i class="fas fa-plus-circle fa-1x"></i></div>
+    </div>
+</div>
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Sub Categories Data</h6>
+            <div class="pull-right" style="margin-right: 125px;margin-top: -23px;">
+                @using (Html.BeginForm("Index", "subcategories", FormMethod.Get, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+                {
+                    <div class="input-group">
+                        <input class="form-control bg-light border-0 small" type="search" placeholder="Search By Sub Category" aria-label="Search" name="search" id="SubCategoryTxtSearch" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary hidden-sm" type="submit"><i class="fas fa-search fa-sm"></i> Search</button>
+                            <button class="btn btn-primary visible-sm" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <ul class="navbar-nav ml-auto">
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                        @using (Html.BeginForm("Index", "books", FormMethod.Get, new { @class = "form-inline mr-auto w-100 navbar-search" }))
+                        {
+                            <div class="input-group">
+                                <input class="form-control bg-light border-0 small" type="search" placeholder="Search By Sub Category" aria-label="Search" name="search" id="SubCategoryTxtSearch" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    @if (Model.Count() != 0)
+                    {
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.ActionLink("Sub Category Name", "Index", new { sortedBy = ViewBag.SortNameParameter, search = Request.QueryString["search"] })
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().category.category_name)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Action")
+                                </th>
+                            </tr>
+                        </thead>
+                        foreach (var item in Model)
+                        {
+                            using (Html.BeginForm("Delete", "subcategories", new { id = item.subcategory_id }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.subcategory_name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.category.category_name)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(" Edit", "Edit", new { id = item.subcategory_id }, new { @class = "btn btn-primary fas fa-edit" })
+                                            @Html.ActionLink(" Details", "Details", new { id = item.subcategory_id }, new { @class = "btn btn-info far fa-file-alt" })
+                                            <input class="btn btn-danger" type="submit" value="Delete"
+                                                   onclick="return confirm('Are you sure you want to delete the Sub Category with ID = @item.subcategory_id');" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                <b class="text-danger">Sorry There Is No Sub Category To Show, @Html.ActionLink("Click Here To Add New One", "Create")</b>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], sortedBy = Request.QueryString["sortedBy"] }), /* To keep Paging when doing sorted,searched */
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })  <!--final overload To show PagedList if needed , like if there are 1 record don't need to show it .... and know current page where we are -->

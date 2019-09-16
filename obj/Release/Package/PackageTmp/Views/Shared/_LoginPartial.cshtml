@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNet.Identity
+@using Library.Models
+@{
+    LibraryDBContext db = new LibraryDBContext();
+    var myUser = db.users.Where(x => x.UserName == User.Identity.Name).Select(x => x.photo).FirstOrDefault();
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600">@User.Identity.GetUserName()</span>
+                <img class="img-profile rounded-circle" height="50" width="50" src="@Url.Content(myUser)">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="~/Manage/Profile">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="~/Manage">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <a class="dropdown-item" href="~/Admin">
+                    <i class="fas fa-users-cog fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Admin Panal
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="document.getElementById('logoutForm').submit()" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+    }
+}
+else
+{
+<ul class="nav navbar-nav navbar-right">
+    <li class=" nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn_2" })</li>
+    <li class=" nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "ml-1 btn_2" })</li>
+</ul>
+}

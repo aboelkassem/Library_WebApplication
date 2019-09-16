@@ -1,0 +1,127 @@
+﻿@model Library.Models.user
+
+@{
+    ViewBag.Title = Model.UserName;
+}
+
+<h2>Details</h2>
+<div class="card o-hidden border-0 shadow-lg">
+    <div class="card-header">
+        <div class="font-weight-bold text-gray-800 text-center h3">
+            @Html.DisplayFor(model => model.first_name) @Html.DisplayFor(model => model.last_name)
+            <i class="fas fa-user"></i>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="p-5">
+                    <table class="table table-striped">
+                        <tr class="form-group row">
+                            <th class="card-title font-weight-bolder badge bg-primary text-lg ">
+                                @Html.DisplayNameFor(model => model.UserName)
+                            </th>
+                            <th class="col-md-10 mb-3 mb-sm-0 text-body text-info ">
+                                @Html.DisplayFor(model => model.UserName)
+                            </th>
+                        </tr>
+
+                        <tr class="form-group row">
+                            <td class="card-title font-weight-bolder badge bg-secondary text-lg">
+                                @Html.DisplayNameFor(model => model.gender)
+                            </td>
+                            <td class="col-md-10 mb-3 mb-sm-0 text-info">
+                                @if (Model.gender.IsEmpty())
+                                {
+                                    <span>No Gender Added</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(model => model.gender)
+                                }
+
+                            </td>
+                        </tr>
+
+                        <tr class="form-group row">
+                            <td class="card-title font-weight-bolder badge bg-success text-lg">
+                                @Html.DisplayNameFor(model => model.join_data)
+                            </td>
+                            <td class="col-md-10 mb-3 mb-sm-0 text-info">
+                                @Html.DisplayFor(model => model.join_data)
+                            </td>
+                        </tr>
+                        <tr class="form-group row">
+                            <td class="card-title font-weight-bolder badge bg-danger text-lg">
+                                @Html.DisplayNameFor(model => model.PasswordHash)
+                            </td>
+                            <td class="col-md-10 mb-3 mb-sm-0 text-info">
+                                @Html.DisplayFor(model => model.PasswordHash)
+                            </td>
+                        </tr>
+                        <tr class="form-group row">
+                            <td class="card-title font-weight-bolder text-lg text-danger">
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </td>
+                            <td class="col-md-10 mb-3 mb-sm-0 text-black-50">
+                                @if (Model.PhoneNumber.IsEmpty())
+                                {
+                                    <span>No Phone Number Added</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(model => model.PhoneNumber)
+                                }
+                            </td>
+                        </tr>
+                        <tr class="form-group row">
+                            <td class="card-title font-weight-bolder text-lg text-danger">
+                                @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                            </td>
+                            <td class="col-md-10 mb-3 mb-sm-0 text-black-50">
+                                @if (Model.PhoneNumberConfirmed == true)
+                                {
+
+                                    <span>Confirmed</span>
+                                }
+                                else
+                                {
+                                    <sspan>Not Confirmed</sspan>
+                                }
+                            </td>
+                        </tr>
+                        <tr class="form-group row">
+                            <td class="card-title font-weight-bolder text-lg text-danger">
+                                @Html.DisplayNameFor(model => model.EmailConfirmed)
+                            </td>
+                            <td class="col-md-10 mb-3 mb-sm-0 text-black-50">
+                                @if (Model.EmailConfirmed == true)
+                                {
+
+                                    <span>Confirmed</span>
+                                }
+                                else
+                                {
+                                    <sspan>Not Confirmed</sspan>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+            </div>
+            <div class="col-lg-4">
+                <div class="pt-5">
+                    <!-- Illustrations -->
+                    <div class="m-0">
+                        <img class="img-fluid img-thumbnail img-profile img px-3 px-sm-4 mt-0 mb-4 hidden-sm" style="width: 43rem;height: 27rem;margin-left:-300px;" src="@Url.Content(Model.photo)" alt="Alt_@Model.photo">
+                        <img class="img-fluid img-circle px-3 px-sm-4 mt-0 mb-4 hidden-lg" style="width: 43rem;height: 27rem;" src="@Url.Content(Model.photo)" alt="Alt_@Model.photo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.ActionLink("Edit The User", "Edit", new { id = Model.Id }, new { @class = " btn btn-info text-white" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = " btn btn-danger text-white" })
+

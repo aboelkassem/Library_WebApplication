@@ -1,0 +1,39 @@
+﻿@model Library.Models.subcategory
+
+@{
+    ViewBag.Title = Model.subcategory_name;
+}
+
+<h2>Details</h2>
+
+
+<div class="card o-hidden border-0 shadow-lg">
+    <div class="card-header">
+        <div class="font-weight-bold text-gray-800 text-center h3">
+            @Html.DisplayFor(model => model.subcategory_name)
+            <i class="fas fa-tag"></i>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="p-5">
+                    <table class="table table-striped">
+                            <tr class="form-group row">
+                                <th class="card-title font-weight-bolder badge bg-primary text-lg ">
+                                  Exist in @Html.DisplayNameFor(model => model.category.category_name)
+                                </th>
+                                <th class="col-md-8 mb-3 mb-sm-0 text-body text-info ">
+                                    @Html.DisplayFor(model => model.category.category_name)
+                                </th>
+                            </tr>
+                     </table>
+                </div>
+             <hr>
+            </div>
+        </div>
+    </div>
+    @Html.ActionLink("Edit The Sub Category", "Edit", new { id = Model.subcategory_id }, new { @class = " btn btn-info text-white" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = " btn btn-danger text-white" })
+</div>

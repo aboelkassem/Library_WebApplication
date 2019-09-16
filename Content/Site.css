@@ -1,0 +1,126 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+/*========================> Bootstrab <==========================*/
+
+
+
+/*========================> Admin <==========================*/
+.description {
+    overflow: auto;
+    height: 111px;
+    width: 330px;
+}
+#wrapper #content-wrapper {
+    overflow-x: auto;
+}
+#accordion{
+    width:100%;
+}
+#accordion h4:hover {
+    cursor: pointer;
+}
+.sidebar{
+    z-index:9999;
+}
+.txtheader {
+    margin-left: 238px;
+}
+
+button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled) {
+    cursor: pointer;
+}
+a:hover{
+    text-decoration:none;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.content-body {
+    padding-top: 90px;
+}
+h6, .h6 {
+    font-size: 1rem;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+h5, .h5 {
+    font-size: 1.25rem;
+}
+.small {
+    font-size: 100%;
+    font-weight: 400;
+}
+.btn {
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.btn-circle {
+    border-radius: 100%;
+    margin-right: 3px;
+}
+.checked {
+    color: blue;
+}
+/*============> Media Query <=================*/
+@media only screen and (min-width: 992px) {
+    html {
+        overflow-y: auto;
+    }
+}

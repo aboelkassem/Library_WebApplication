@@ -1,0 +1,66 @@
+﻿@model Library.Models.comment
+
+@{
+    ViewBag.Title = "Edit Comment";
+}
+
+@using (Html.BeginForm("Edit", "comments", FormMethod.Post, new { enctype = "multipart/form-data", @class = "user" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.comment_id)
+    <div class="card o-hidden border-0 shadow-lg">
+        <div class="card-header">
+            <div class="font-weight-bold text-gray-800 text-center h3">
+                Edit Comment To Book in Library
+                <i class="fas fa-comment"></i>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="p-5">
+                        <div class="form-group row">
+                            @Html.ValidationSummary(true, "", new { @class = "invalid-feedback text-danger" })
+                            @Html.LabelFor(model => model.comments, htmlAttributes: new { @class = "col-sm-2 col-form-label form-control-plaintext" })
+                            <div class="col-sm-10 mb-3 mb-sm-0">
+                                @Html.EditorFor(model => model.comments, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(model => model.comments, "", new { @class = "invalid-feedback text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.book_id, "Book Commented", htmlAttributes: new { @class = "control-label col-md-2 form-control-plaintext" })
+                            <div class="col-md-10 mb-3 mb-sm-0">
+                                @Html.DropDownList("book_id", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.book_id, "", new { @class = "invalid-feedback text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.user_id, "User Added", htmlAttributes: new { @class = "control-label col-md-2 form-control-plaintext" })
+                            <div class="col-md-10 mb-3 mb-sm-0">
+                                @Html.DropDownList("user_id", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "invalid-feedback text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-primary btn-user btn-block" />
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="pt-5">
+                        <!-- Illustrations -->
+                        <div class="m-0">
+                            <img class="hidden-sm hidden-xs px-3 px-sm-4 mt-3 mb-4" style="width: 43rem;height: 27rem;margin-left:-300px;" src="~/Content/img/recycle.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.ActionLink("Back to List", "Index", null, new { @class = " btn btn-danger text-white" })
+    </div>
+}

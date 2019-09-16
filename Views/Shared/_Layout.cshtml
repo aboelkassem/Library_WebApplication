@@ -1,0 +1,213 @@
+﻿@using Library.Models
+@{ 
+    LibraryDBContext db = new LibraryDBContext();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link rel="icon" href="~/favicon.ico">
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/themify-icons.css" rel="stylesheet" />
+    <link href="~/Content/flaticon.css" rel="stylesheet" />
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/nice-select.css" rel="stylesheet" />
+    <link href="~/Content/slick.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="~/Home"> <img src="~/Images/logo.png" width="120px" height="70px" alt="logo"> Library </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu-item justify-content-end"
+                             id="navbarSupportedContent">
+                            <ul class="navbar-nav align-items-center">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="~/Home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/Home/About">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/book/Create">Add Book</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="~/book/index">Books</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Categories
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        @foreach (var category in db.categories.ToList())
+                                        {
+                                            @Html.ActionLink(category.category_name, "Category", "Home", new { Id = category.category_id }, new { @class = "dropdown-item" })
+                                        }
+                                    </div>
+                                </li>
+                                @Html.Partial("_LoginPartial")
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header part end-->
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+        <hr />
+        <!-- footer part start-->
+        <footer class="footer-area">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-xl-12 col-sm-12 col-md-12">
+                        <div class="single-footer-widget footer_2 text-center">
+                            <h4>Contact us</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl-3">
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-home"></i></span>
+                            <div class="media-body">
+                                <h3>Naser, Beniswef.</h3>
+                                <p>Egypt</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl-4">
+                        <div class="single-footer-widget footer_2">
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                                <div class="media-body">
+                                    <h3><a href="tel:+201154321101">+201154321101</a></h3>
+                                    <p>Available 24 Hours</p>
+                                </div>
+                            </div>
+                            <div class="social_icon">
+                                <a href="https://www.facebook.com/mohamed.abdelrahman996"> <i class="ti-facebook"></i> </a>
+                                <a href="https://twitter.com/Mohamed34547965"> <i class="ti-twitter-alt"></i> </a>
+                                <a href="https://www.linkedin.com/in/mohamed-abd-elrahman-435842182"> <i class="ti-linkedin"></i> </a>
+                                <a href="https://github.com/Aboelkassem"> <i class="ti-github"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-md-4">
+                        <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-email"></i></span>
+                            <div class="media-body">
+                                <h3><a href="mailto:mohamedabdelrahman972@gmail.com">mohamedabdelrahman972@gmail.com</a></h3>
+                                <p>Send me anytime!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright_part_text text-center">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p class="footer-text m-0">
+                                        Copyright &copy;
+                                        <script>document.write(new Date().getFullYear());</script> | This Project is made with <i class="ti-heart" aria-hidden="true"></i> by Mohamed abdelrahman</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer part end-->
+    </div>
+    <script src="~/Scripts/jquery-1.12.1.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/swiper.min.js"></script>
+    <script src="~/Scripts/masonry.pkgd.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/jquery.nice-select.min.js"></script>
+    <script src="~/Scripts/slick.min.js"></script>
+    <script src="~/Scripts/jquery.counterup.min.js"></script>
+    <script src="~/Scripts/jquery.nice-select.min.js"></script>
+    <script src="~/Scripts/waypoints.min.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+    <script>
+        @*/* Dynamic Dropdown List */
+            $(function () {
+                $("#Category_Id").change(function () {
+                    $.get(@Url.Action("GetSubCategoryList","book"), { ID: $("#Category_Id").val() }, function (data) {
+                        $.each(data, function (index, row) {
+                            $("#subcategory_id").append("<option value='" + row.subcategory_id + "'>" + row.subcategory_name + "</option")
+                        });
+                    });
+                });
+            });*@
+        $(function () {
+
+            //Auto Complete With jQuery UI
+            $("#BooksTxtSearch").autocomplete({
+                source: '@Url.Action("GetBooks","book")',
+                minLength: 2
+            });
+
+            $("#btnSubmit").click(function () {
+                $("#loaderDiv").show();
+                var myformdata = $("#MyForm").serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "~/book/Create",
+                    data: myformdata,
+                    success: function () {
+                        $("#loaderDiv").hide();
+                    }
+                });
+            });
+        });
+    </script>
+    @section Validation {
+        <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // GetClientValidationRules
+            $.validator.unobtrusive.adapters.addSingleVal("fileszie", "maxsize");
+            $.validator.addMethod("filesize", function (value, element, params) {
+
+                var files = $(element).prop("files");
+                s = files[0].size;
+                return s <= 1048576 * params;
+            });
+        </script>
+    }
+    @RenderSection("scripts", required: false)
+</body>
+</html>

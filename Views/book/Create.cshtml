@@ -1,0 +1,157 @@
+﻿@model Library.Models.book
+
+@{
+    ViewBag.Title = "Create book";
+}
+
+
+
+<div class="card o-hidden border-0 shadow-lg MyBody">
+    <div class="card-header h1 font-weight-bold">
+        <div class="font-weight-bold text-gray-800 text-center h4">
+            <h1>Add New Book To Library <i class="fas fa-book"></i></h1>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-7">
+                @using (Html.BeginForm("Create", "book", FormMethod.Post, new { enctype = "multipart/form-data", @class = "user" ,id="MyForm"}))
+                {
+                    @Html.AntiForgeryToken()
+                <div class="p-5">
+                    <div class="form-group row">
+                        @Html.ValidationSummary(true, "", new { @class = "invalid-feedback text-danger" })
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Book Title</h4></label>
+                        <div class="col-sm-10 mb-3 mb-sm-0">
+                            @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control ", placeholder = "Title Of the Book ....." } })
+                            @Html.ValidationMessageFor(model => model.title, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Edition</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.EditorFor(model => model.edition, new { htmlAttributes = new { @class = "form-control", placeholder = "Edition Of the Book ....." } })
+                            @Html.ValidationMessageFor(model => model.edition, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Price</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", placeholder = "Price Of the Book ....." } })
+                            @Html.ValidationMessageFor(model => model.price, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Publication</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.DropDownList("publication_id", null, htmlAttributes: new { @class = "form-control dropdown default-select", placeholder = "Publication Of the Book ....." }) <a class="btn btn-info" href="~/publication/Create"><i class="fas fa-plus"> Add Publication</i></a>
+                            @Html.ValidationMessageFor(model => model.publication_id, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Author</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.DropDownList("author_id", null, htmlAttributes: new { @class = "form-control dropdown default-select", placeholder = "Author Of the Book ....." }) <a class="btn btn-info" href="~/publication/Create"><i class="fas fa-plus"> Add Author</i></a>
+                            @Html.ValidationMessageFor(model => model.author_id, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Category</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.DropDownList("subcategory_id", null, htmlAttributes: new { @class = "form-control dropdown default-select", placeholder = "Category Of the Book ....." })
+                            @Html.ValidationMessageFor(model => model.subcategory_id, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Pages</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.EditorFor(model => model.pages, new { htmlAttributes = new { @class = "form-control", placeholder = "Number Of Page ....." } })
+                            @Html.ValidationMessageFor(model => model.pages, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h5>Description</h5></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.TextAreaFor(model => model.description, new { @class = "form-control single-textarea", rows = "5", placeholder = "Description Of the book", onfocus = "this.placeholder = ''", onblur = "this.placeholder = 'Message'" })
+                            @Html.ValidationMessageFor(model => model.description, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Tags</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.EditorFor(model => model.tags, new { htmlAttributes = new { @class = "form-control tags ", placeholder = "Seperate between each tag with (,)" } })
+                            @Html.ValidationMessageFor(model => model.tags, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Availablity</h4></label>
+                        <div class="col-md-10 custom-control custom-radio mb-3">
+                            @Html.RadioButton("availabilty", 1, true) Yes
+                            @Html.RadioButton("availabilty", 2) No
+                            @Html.ValidationMessageFor(model => model.availabilty, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h5>Rate Of The Book</h5></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.DropDownList("rate", new List<SelectListItem>
+                            {
+                                new SelectListItem {Text = "Bad",Value = "1"},
+                                new SelectListItem {Text = "Good",Value = "2"},
+                                new SelectListItem {Text = "Very Good",Value = "3"},
+                                new SelectListItem {Text = "Excellent",Value = "4"}
+                            }, "Rate Of The Book", new { @class = "form-control dropdown default-select" })
+                            @Html.ValidationMessageFor(model => model.rate, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h5>Book Cover</h5></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.TextBoxFor(model => model.uploadedImage, new { type = "file", @class = "form-control-file custom-file-input", data_val_extension = "Select Only Images files", data_val_extension_extension = "jpg,png,jpeg,gif", required = true })
+                            <label class="custom-file-label" for="photo">Choose file...</label>
+                            @Html.ValidationMessageFor(model => model.uploadedImage, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label form-control-plaintext h1 font-weight-bold"><h4>Book File</h4></label>
+                        <div class="col-md-10 mb-3 mb-sm-0">
+                            @Html.TextBoxFor(model => model.uploadedFile, new { type = "file", @class = "form-control-file custom-file-input", data_val_extension = "Select Only PDF files", data_val_extension_extension = "pdf", required = true })
+                            <label class="custom-file-label" for="file">Choose file...</label>
+                            @Html.ValidationMessageFor(model => model.uploadedFile, "", new { @class = "invalid-feedback text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-offset-2 col-md-10 mt-3">
+                        <input type="submit" value="Create" id="btnSubmit" class="btn btn-primary btn-user btn-block" />
+                    </div>
+                    <div style="text-align:center;display:none" id="loaderDiv">
+                        <img src="~/Images/loading.gif" />
+                    </div>
+                    <hr>
+                </div>
+                }
+                </div>
+            <div class="col-lg-5">
+                <div class="pt-5">
+                    <!-- Illustrations -->
+                    <div class="m-0">
+                        <img class="hidden-sm hidden-xs px-3 px-sm-4 mt-3 mb-4" src="~/Content/img/undraw_Bibliophile_hwqc.svg" alt="">
+                    </div>
+                    <div class="m-0">
+                        <img class="hidden-sm hidden-xs px-3 px-sm-4 mt-3 mb-4" src="~/Content/img/undraw_Books_l33t.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

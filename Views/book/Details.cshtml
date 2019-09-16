@@ -1,0 +1,271 @@
+﻿@model Library.Models.book
+@using Library.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = Model.title;
+    LibraryDBContext db = new LibraryDBContext();
+    List<book> books = db.books.ToList();
+    List<comment> comments = db.comments.ToList();
+    List<user> users = db.users.ToList();
+    List<author> authors = db.authors.ToList();
+    List<publication> publications = db.publications.ToList();
+
+    var publication = publications.Where(x => x.publication_id == Model.publication_id).FirstOrDefault();
+    var author = authors.Where(x => x.author_id == Model.author_id).FirstOrDefault();
+
+    var tags = Model.tags.Split(',');
+}
+<section class="blog_area single-post-area section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    <div class="feature-img">
+                        <img class="img-fluid" src="@Url.Content(Model.photo)" alt="Alt_@Model.title">
+                    </div>
+                    <div class="blog_details">
+                        <h2>
+                            @Model.title
+                        </h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a><i class="fas fa-print"></i> Edition @Model.edition<sup>Th</sup></a></li>
+                            <li><a><i class="far fa-file"></i> Pages @Model.pages</a></li>
+                            <li><a><i class="far fa-comments"></i> @comments.Where(x => x.book_id == Model.book_id).Count() Comments</a></li>
+                            @if (Model.availabilty == 1)
+                            {
+                                <li><a><i class="far fa-check-circle"></i>Available</a></li>
+                            }
+                            else if (Model.availabilty == 2)
+                            {
+                                <li><a><i class="far fa-times-circle"></i>Not Available</a></li>
+                            }
+                        </ul>
+                        <div class="quote-wrapper">
+                            <div class="quotes">
+                                @Model.description
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <a href="@Url.Content(Model.File)" class="like-info">
+                            <span class="align-middle"><i class="fas fa-file-download"></i></span>
+                            Download The Book
+                        </a>
+                        <div class="col-sm-4 text-center my-2 my-sm-0">
+                            <p class="comment-count"><span class="align-middle"><i class="fas fa-plus"></i> Added By</span>: <a href="~/Home/user/@users.Where(x => x.Id == Model.member_id).FirstOrDefault().Id">@users.Where(x => x.Id == Model.member_id).FirstOrDefault().UserName</a></p> 
+                        </div>
+                        <ul class="social-icons">
+                            @if (Model.rate == 1)
+                            {
+                                <span class="align-middle">Rating </span>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                            }
+                            @if (Model.rate == 2)
+                            {
+                                <span class="align-middle">Rating </span>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                            }
+                            @if (Model.rate == 3)
+                            {
+                                <span class="align-middle">Rating </span>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="far fa-star "></i></a></li>
+                            }
+                            @if (Model.rate == 4)
+                            {
+                                <span class="align-middle">Rating </span>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                                <li><a><i class="fas fa-star checked"></i></a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="navigation-area">
+
+                        @if (publication != null)
+                        {
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                    <div class="thumb">
+                                        <a>
+                                            <img src="@Url.Content(publication.logo)" style="height: 100px;" alt="alt_@publication.name">
+                                        </a>
+                                    </div>
+                                    <div class="detials">
+                                        <p>Publiced By</p>
+                                        <a href="~/publication/Details/@publication.publication_id">
+                                            <h4>@publication.name</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                    <div class="detials">
+                                        <p>@publication.contact</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="blog-author">
+                    <div class="media align-items-center">
+                        <img src="@Url.Content(author.photo)" alt="Alt_@author.first_name">
+                        <div class="media-body">
+                            <div>Written By</div>
+                            <a href="~/author/Details/@author.author_id">
+                                @if (@author.first_name != "Unknown")
+                                {
+                                    <h4>@author.first_name @author.last_name</h4>
+                                }
+                                else
+                                {
+                                    <h4>@author.first_name</h4>
+                                }
+
+                            </a>
+                            <p>
+                                @author.description
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="comments-area">
+                    <h4>@comments.Where(x => x.book_id == Model.book_id).Count() Comments</h4>
+                    @foreach (var comment in comments.Where(x => x.book_id == Model.book_id))
+                    {
+                        <div class="comment-list">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb">
+                                        <img class="img-circle img-fluid img-responsive" src="@Url.Content(users.Where(x=>x.Id == comment.user_id).FirstOrDefault().photo)" alt="">
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">
+                                            @comment.comments
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    @if (@users.Where(x => x.Id == comment.user_id).FirstOrDefault().first_name == null)
+                                                    {
+                                                        <a href="~/Home/user/@users.Where(x => x.Id == comment.user_id).FirstOrDefault().Id">@users.Where(x => x.Id == comment.user_id).FirstOrDefault().UserName</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="~/Home/user/@users.Where(x => x.Id == comment.user_id).FirstOrDefault().Id">@users.Where(x => x.Id == comment.user_id).FirstOrDefault().first_name @users.Where(x => x.Id == comment.user_id).FirstOrDefault().last_name</a>
+                                                    }
+                                                </h5>
+                                                <p class="date">@comment.comment_data</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="comment-form">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <h4>Leave a Reply</h4>
+                        using (Html.BeginForm("Comment", "Home", FormMethod.Post, new { @class = "form-contact comment_form", id = "commentForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("book_id", Model.book_id)
+                            @Html.Hidden("user_id", User.Identity.GetUserId())
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100" name="comments" id="comment" cols="30" rows="9"
+                                                  placeholder="Write Comment"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="button btn_1 button-contactForm"><i class="far fa-paper-plane"></i></button>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                    <h4>You Need To @Html.ActionLink("Login", "Login", "Account") to Leave a comment, If don't You can @Html.ActionLink("Register", "Register", "Account")</h4>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                        @using (Html.BeginForm("Index","book",FormMethod.Get))
+                        {
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input name="searched" type="text" class="form-control" id="BooksTxtSearch" placeholder='Search your book title'
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search For others books'">
+                                    <div class="input-group-append">
+                                        <button class="btn" type="button"><i class="ti-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button rounded-0 primary-bg text-white w-100 btn_1" type="submit">Search</button>
+                        }
+                    </aside>
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Category</h4>
+                        <ul class="list cat-list">
+                            @foreach (var category in db.categories.ToList())
+                            {
+                                <li>
+                                    <a href="~/Home/Category/@category.category_id" class="d-flex">
+                                        <p>@category.category_name</p>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </aside>
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Recent Books</h3>
+                        @foreach (var book in books.OrderByDescending(x => x.book_id).Take(5).ToList())
+                        {
+                            <div class="media post_item">
+                                <img class="img-circle img-fluid" style="width:90px" src="@Url.Content(book.photo)" alt="post">
+                                <div class="media-body">
+                                    <a href="~/book/Details/@book.book_id">
+                                        <h3>@book.title</h3>
+                                    </a>
+                                    <p>@book.add_date</p>
+                                </div>
+                            </div>
+                        }
+                    </aside>
+                    <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">Tag Clouds <i class="fas fa-tags"></i></h4>
+                        <ul class="list">
+                            @foreach (var tag in tags)
+                            {
+                                <li>
+                                    <a href="~/Home/tag?tag=@tag.Trim()">@tag.Trim()</a>
+                                </li>
+                            }
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area end =================-->

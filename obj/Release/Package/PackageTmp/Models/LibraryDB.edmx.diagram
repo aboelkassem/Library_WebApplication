@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2f465ab531ba4ce095a134b0398c6623" Name="Diagram1">
+        <EntityTypeShape EntityType="LibraryModel.author" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="LibraryModel.book" Width="1.5" PointX="5.25" PointY="4.25" />
+        <EntityTypeShape EntityType="LibraryModel.category" Width="1.5" PointX="0.75" PointY="13.875" />
+        <EntityTypeShape EntityType="LibraryModel.comment" Width="1.5" PointX="7.5" PointY="5.625" />
+        <EntityTypeShape EntityType="LibraryModel.Log" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="LibraryModel.publication" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="LibraryModel.Role" Width="1.5" PointX="0.75" PointY="6" />
+        <EntityTypeShape EntityType="LibraryModel.subcategory" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="LibraryModel.UserClaim" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="LibraryModel.UserLogin" Width="1.5" PointX="5.25" PointY="13" />
+        <EntityTypeShape EntityType="LibraryModel.user" Width="1.5" PointX="3" PointY="3.875" />
+        <AssociationConnector Association="LibraryModel.FK_books_authors" />
+        <AssociationConnector Association="LibraryModel.FK_books_publications" />
+        <AssociationConnector Association="LibraryModel.FK_books_subcategory" />
+        <AssociationConnector Association="LibraryModel.FK_books_users" />
+        <AssociationConnector Association="LibraryModel.FK_comments_books" />
+        <AssociationConnector Association="LibraryModel.FK_subcategory_categories" />
+        <AssociationConnector Association="LibraryModel.FK_comments_users" />
+        <AssociationConnector Association="LibraryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="LibraryModel.FK_dbo_UserLogins_dbo_Users_UserId" />
+        <AssociationConnector Association="LibraryModel.UserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
