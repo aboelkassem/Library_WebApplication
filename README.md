@@ -12,7 +12,7 @@ this system Management used in bulting asp.net mvc, sql server , entity framewor
 * User Can using tags with categories to get all interesting books about what he want
 * User Can Leave a comment or feedback in the book and rate it
 * User has full profile edit functionality and get his actitivies
-* Admin has All permissions to add every thing from control panel like authors, publications, books, categories, tages .... etc
+* Admin has All permissions to add every thing from control panel like authors, publications, books, categories... etc
 
 
 ### for Demo or live http://library.somee.com 
