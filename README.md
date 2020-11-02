@@ -1,7 +1,7 @@
 # Library
 library system managment for uploading books,downloading or browsing 
 <br>
-This Project Is just Trainging For Me about Discover New Things in Technonlogy,
+This Project Is just Training For Me about Discover New Things in Technology,
 just learning from offical microsoft docs
 <br>
 Tools used: asp.net mvc, sql server , entity framework, ajax.
