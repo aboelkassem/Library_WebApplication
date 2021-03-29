@@ -1,8 +1,7 @@
 # Library
-library system managment for uploading books,downloading or browsing 
+A library managment system for uploading, downloading and browsing books based on ASP.NET MVC.
 <br>
-This Project Is just Training For Me about Discover New Things in Technology,
-just learning from offical microsoft docs
+This project is just training for me to discover new things in technology, and apply some concepts at my college
 <br>
 Tools used: asp.net mvc, sql server , entity framework, ajax.
 
